@@ -1,0 +1,261 @@
+1. How do users access your deployed project?
+
+Suppose your project is AI-Driven Multilingual Healthcare Assistant.
+
+User
+   │
+   ▼
+https://healthcare-assistant.com
+   │
+Frontend (React)
+   │
+REST API
+   │
+Backend (FastAPI)
+   │
+AI Model + PostgreSQL
+
+The user never talks directly to the database or AI model.
+
+The browser communicates with your backend through REST APIs.
+
+2. What is a REST API?
+
+A REST API is simply a way for two applications to communicate over HTTP.
+
+Example:
+
+User types:
+
+"What is Ayushman Bharat?"
+
+The frontend sends a request to your backend.
+
+POST /chat
+
+Body:
+
+{
+  "message":"What is Ayushman Bharat?"
+}
+
+Backend processes it.
+
+Backend returns
+
+{
+  "reply":"Ayushman Bharat is a Government healthcare scheme..."
+}
+
+That's a REST API.
+
+3. What is fetch()?
+
+fetch() is a built-in JavaScript function for calling APIs.
+
+Example:
+
+const response = await fetch("/api/chat",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        message:userMessage
+    })
+});
+
+const data=await response.json();
+
+console.log(data.reply);
+
+Advantages
+
+Built into JavaScript
+No installation
+Lightweight
+4. What is Axios?
+
+Axios is another way to call APIs.
+
+Install
+
+npm install axios
+
+Example
+
+import axios from "axios";
+
+const response=await axios.post("/api/chat",{
+    message:userMessage
+});
+
+console.log(response.data.reply);
+
+Advantages
+
+Simpler syntax
+Better error handling
+Automatic JSON parsing
+Popular in React projects
+Which one should you use?
+
+For your project:
+
+Axios is generally easier to work with in React applications.
+
+5. What is Docker?
+
+Docker packages your application together with everything it needs to run.
+
+Without Docker
+
+Install Python
+
+Install Node
+
+Install PostgreSQL
+
+Install libraries
+
+Hope everything works...
+
+With Docker
+
+docker run healthcare-chatbot
+
+Everything is already packaged.
+
+6. What is docker-compose.yml?
+
+Your project has multiple parts.
+
+Frontend
+
+Backend
+
+Database
+
+Instead of starting each manually,
+
+docker-compose starts all of them together.
+
+Example
+
+version: "3.9"
+
+services:
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: healthcare
+    ports:
+      - "5432:5432"
+
+Run
+
+docker compose up
+
+Everything starts automatically.
+
+7. Complete Architecture
+                User
+                  │
+                  ▼
+        React Frontend
+                  │
+      Axios / fetch()
+                  │
+            REST API
+                  │
+          FastAPI Backend
+          │            │
+          │            │
+      Ollama        PostgreSQL
+          │            │
+          └──────┬─────┘
+                 │
+             Response
+8. Deployment using Docker
+Developer
+
+        │
+
+   GitHub Repository
+
+        │
+
+ Jenkins (optional)
+
+        │
+
+ Docker Build
+
+        │
+
+ Docker Image
+
+        │
+
+ Docker Compose
+
+        │
+
+ Linux Server
+
+        │
+
+ Users
+9. Deployment using Kubernetes
+Developer
+
+        │
+
+ GitHub
+
+        │
+
+ Jenkins
+
+        │
+
+ Docker
+
+        │
+
+ Docker Registry
+
+        │
+
+ Kubernetes Cluster
+
+        │
+
+ Load Balancer
+
+        │
+
+ Users
+Recommended learning order
+Build the React frontend.
+Create REST APIs using FastAPI.
+Connect the frontend using Axios.
+Add PostgreSQL if you need to store data.
+Dockerize the frontend and backend.
+Use docker-compose.yml to run all services locally.
+Deploy to a server (or Kubernetes if required by your DevOps course).
+
+This progression will help you understand each layer before moving to the next, and it's a common workflow in modern full-stack and DevOps projects.
