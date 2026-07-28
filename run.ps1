@@ -63,8 +63,7 @@ if ($Monitor) {
     Write-Host "  🚀  Starting all services WITH monitoring (Prometheus + Grafana)..." -ForegroundColor Cyan
     Write-Host ""
     docker compose --project-directory $ProjectRoot --profile monitoring up -d --build
-}
-else {
+} else {
     Write-Host "  🚀  Starting core services (Frontend, Backend, PostgreSQL, Ollama)..." -ForegroundColor Cyan
     Write-Host ""
     docker compose --project-directory $ProjectRoot up -d --build
@@ -114,14 +113,12 @@ if (Test-Path $envFile) {
 $existingModels = docker exec healthcare-ollama ollama list 2>$null
 if ($existingModels -and $existingModels -match $modelName) {
     Write-Host "  ✅  Model '$modelName' is already available" -ForegroundColor Green
-}
-else {
+} else {
     Write-Host "  📥  Pulling model '$modelName' (this may take several minutes on first run)..." -ForegroundColor Yellow
     docker exec healthcare-ollama ollama pull $modelName
     if ($LASTEXITCODE -eq 0) {
         Write-Host "  ✅  Model '$modelName' pulled successfully" -ForegroundColor Green
-    }
-    else {
+    } else {
         Write-Host "  ⚠️   Failed to pull model. You can pull it manually later:" -ForegroundColor Yellow
         Write-Host "       docker exec -it healthcare-ollama ollama pull $modelName" -ForegroundColor DarkYellow
     }
