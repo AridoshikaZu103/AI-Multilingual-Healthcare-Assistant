@@ -82,7 +82,7 @@ Write-Host "  ⏳  Waiting for PostgreSQL to be ready..." -ForegroundColor Yello
 $maxRetries = 30
 $retry = 0
 while ($retry -lt $maxRetries) {
-    $health = docker inspect --format='{{.State.Health.Status}}' healthcare-postgres 2>$null
+    $health = docker inspect --format "{{.State.Health.Status}}" healthcare-postgres 2>$null
     if ($health -eq "healthy") {
         Write-Host "  ✅  PostgreSQL is healthy" -ForegroundColor Green
         break
