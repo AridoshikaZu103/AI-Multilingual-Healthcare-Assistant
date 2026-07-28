@@ -1,0 +1,71 @@
+{
+  "app": {
+    "title": "AI Healthcare Assistant",
+    "subtitle": "Multilingual Healthcare Information for Rural Communities",
+    "disclaimer": "This provides general healthcare information only and is not a substitute for professional medical advice."
+  },
+  "nav": {
+    "chat": "Chat Assistant",
+    "schemes": "Healthcare Schemes",
+    "facilities": "Find Facilities",
+    "faq": "FAQs"
+  },
+  "chat": {
+    "title": "Healthcare Assistant",
+    "placeholder": "Ask about healthcare schemes, eligibility, facilities...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "welcome": "Hello! I'm your AI Healthcare Assistant. I can help you with:",
+    "suggestions": [
+      "What is Ayushman Bharat?",
+      "Am I eligible for PMJAY?",
+      "What documents do I need?",
+      "Find nearest hospital",
+      "Vaccination schedule",
+      "Emergency helpline numbers"
+    ]
+  },
+  "schemes": {
+    "title": "Government Healthcare Schemes",
+    "subtitle": "Explore healthcare schemes available for you and your family",
+    "search": "Search schemes...",
+    "eligibility": "Eligibility",
+    "documents": "Documents Required",
+    "benefits": "Benefits",
+    "coverage": "Coverage",
+    "website": "Official Website",
+    "all": "All Categories",
+    "noResults": "No schemes found matching your search."
+  },
+  "facilities": {
+    "title": "Healthcare Facilities",
+    "subtitle": "Find government hospitals and health centres near you",
+    "search": "Search by name, district, or state...",
+    "allTypes": "All Types",
+    "phone": "Phone",
+    "emergency": "Emergency",
+    "services": "Services",
+    "timings": "Timings",
+    "noResults": "No facilities found matching your filters."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Quick answers to common healthcare queries",
+    "allCategories": "All Categories",
+    "noResults": "No FAQs found for this category."
+  },
+  "language": {
+    "select": "Language",
+    "en": "English",
+    "hi": "हिन्दी",
+    "te": "తెలుగు"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again.",
+    "retry": "Retry",
+    "viewDetails": "View Details",
+    "close": "Close",
+    "back": "Back"
+  }
+}
