@@ -43,7 +43,7 @@ An intelligent, multilingual virtual healthcare assistant designed to improve he
 |-------|-----------|
 | **Frontend** | React 18, Vite, Tailwind CSS 3, Axios, React Router |
 | **Backend** | Python 3.12, FastAPI, SQLAlchemy (async), Pydantic |
-| **AI/NLP** | Ollama, LLama 3, LangChain |
+| **AI/NLP** | Ollama, Gemma 2B, LangChain |
 | **Database** | PostgreSQL 16 |
 | **DevOps** | Docker, Docker Compose, Nginx |
 | **Monitoring** | Prometheus, Grafana |
@@ -67,7 +67,7 @@ An intelligent, multilingual virtual healthcare assistant designed to improve he
                    │            │
                    │            │
                    ▼            ▼
-          Ollama (Llama 3)   PostgreSQL
+           Ollama (Gemma 2B)   PostgreSQL
                    │
                    ▼
             AI-generated Response
@@ -192,7 +192,7 @@ If you prefer not to use the launcher script:
 docker compose up -d --build
 
 # Pull the LLM model (first time only)
-docker exec -it healthcare-ollama ollama pull llama3
+docker exec -it healthcare-ollama ollama pull gemma:2b
 
 # Start with monitoring
 docker compose --profile monitoring up -d --build

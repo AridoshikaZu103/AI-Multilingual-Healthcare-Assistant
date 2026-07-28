@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     # Ollama / LLM
     OLLAMA_BASE_URL: str = "http://ollama:11434"
-    OLLAMA_MODEL: str = "llama3"
+    OLLAMA_MODEL: str = "gemma:2b"
 
     # Supported languages
     SUPPORTED_LANGUAGES: str = "en,hi,te"

@@ -26,7 +26,7 @@ services:
     environment:
       - DATABASE_URL=postgresql+asyncpg://admin:password@postgres:5432/healthcare
       - OLLAMA_BASE_URL=http://ollama:11434
-      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-gemma:2b}
       - CORS_ORIGINS=http://localhost:3000,http://frontend:3000
       - DEBUG=False
     depends_on:

@@ -113,7 +113,7 @@ Write-Host "  [AI] Checking Ollama LLM model..." -ForegroundColor Cyan
 # Give Ollama a moment to start
 Start-Sleep -Seconds 3
 
-$modelName = "llama3"
+$modelName = "gemma:2b"
 $envFile = Join-Path $ProjectRoot ".env"
 if (Test-Path $envFile) {
     $envContent = Get-Content $envFile -Raw
