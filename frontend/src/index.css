@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Styles ────────────────────────────────────── */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-surface-950 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-500;
+  }
+}
+
+/* ── Component Styles ───────────────────────────────── */
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-surface-800/50 backdrop-blur-xl border border-surface-700/50 rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-surface-800/70 hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-500/5;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 via-primary-300 to-accent-400 bg-clip-text text-transparent;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-xl
+           transition-all duration-300 hover:from-primary-500 hover:to-primary-400
+           hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.98]
+           focus:outline-none focus:ring-2 focus:ring-primary-500/50;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-surface-700/50 text-surface-200 font-medium rounded-xl border border-surface-600/50
+           transition-all duration-300 hover:bg-surface-700 hover:border-primary-500/30 hover:text-white
+           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-surface-500/50;
+  }
+
+  /* Chip / tag */
+  .chip {
+    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full
+           bg-primary-500/10 text-primary-300 border border-primary-500/20;
+  }
+
+  /* Input field */
+  .input-field {
+    @apply w-full px-4 py-3 bg-surface-800/50 border border-surface-600/50 rounded-xl text-white
+           placeholder:text-surface-400 focus:outline-none focus:border-primary-500/50
+           focus:ring-2 focus:ring-primary-500/20 transition-all duration-300;
+  }
+
+  /* Sidebar nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-surface-300 font-medium
+           transition-all duration-200 hover:bg-surface-800/50 hover:text-white cursor-pointer;
+  }
+
+  .nav-item.active {
+    @apply bg-primary-500/10 text-primary-300 border border-primary-500/20;
+  }
+
+  /* Chat message bubbles */
+  .chat-bubble-user {
+    @apply ml-auto max-w-[80%] px-5 py-3 rounded-2xl rounded-br-md
+           bg-gradient-to-br from-primary-600 to-primary-700 text-white;
+  }
+
+  .chat-bubble-bot {
+    @apply mr-auto max-w-[80%] px-5 py-3 rounded-2xl rounded-bl-md
+           bg-surface-800/70 text-surface-100 border border-surface-700/50;
+  }
+
+  /* Typing indicator */
+  .typing-dot {
+    @apply w-2 h-2 bg-primary-400 rounded-full;
+    animation: typing 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+/* ── Utility Animations ─────────────────────────────── */
+@layer utilities {
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+}
