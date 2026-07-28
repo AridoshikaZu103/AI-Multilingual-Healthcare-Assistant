@@ -1,1 +1,52 @@
-.txt
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# ── Node ──
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Build output ──
+frontend/dist/
+frontend/.vite/
+
+# ── Environment ──
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Docker ──
+docker-compose.override.yml
+
+# ── Monitoring data ──
+prometheus-data/
+grafana-data/
+
+# ── Misc ──
+*.log
+*.tmp
+.agents/
