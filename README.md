@@ -140,7 +140,7 @@ AI-Multilingual-Healthcare-Assistant/
 - [Docker](https://docs.docker.com/get-docker/) and Docker Compose installed
 - Minimum 8 GB RAM (recommended for running the LLM)
 
-### Quick Start
+### Quick Start (One Command)
 
 1. **Clone the repository**
    ```bash
@@ -148,29 +148,58 @@ AI-Multilingual-Healthcare-Assistant/
    cd AI-Multilingual-Healthcare-Assistant
    ```
 
-2. **Start all services**
-   ```bash
-   docker compose up -d
+2. **Run the launcher script**
+   ```powershell
+   .\run.ps1
    ```
 
-3. **Pull the LLM model** (first time only)
-   ```bash
-   docker exec -it healthcare-ollama ollama pull llama3
-   ```
+   That's it! The script will automatically:
+   - ✅ Check that Docker is running
+   - 🏗️ Build and start all containers (Frontend, Backend, PostgreSQL, Ollama)
+   - ⏳ Wait for PostgreSQL to be healthy
+   - 📥 Pull the LLM model if not already present
+   - 🎉 Print all access URLs when ready
 
-4. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Docs (Swagger): http://localhost:8000/docs
+3. **Access the application**
+   - 🌐 Frontend: http://localhost:3000
+   - 📡 Backend API: http://localhost:8000
+   - 📖 API Docs (Swagger): http://localhost:8000/docs
+
+### Launcher Script Options
+
+| Command | Description |
+|---------|-------------|
+| `.\run.ps1` | Start all core services |
+| `.\run.ps1 -Monitor` | Start with Prometheus + Grafana monitoring |
+| `.\run.ps1 -Stop` | Stop all running services |
+| `.\run.ps1 -Reset` | Stop, remove data volumes, and restart fresh |
 
 ### Start with Monitoring
 
-```bash
-docker compose --profile monitoring up -d
+```powershell
+.\run.ps1 -Monitor
 ```
 
-- Prometheus: http://localhost:9090
-- Grafana: http://localhost:3001 (admin/admin)
+- 📊 Prometheus: http://localhost:9090
+- 📈 Grafana: http://localhost:3001 (admin/admin)
+
+### Manual Docker Commands (Alternative)
+
+If you prefer not to use the launcher script:
+
+```bash
+# Start core services
+docker compose up -d --build
+
+# Pull the LLM model (first time only)
+docker exec -it healthcare-ollama ollama pull llama3
+
+# Start with monitoring
+docker compose --profile monitoring up -d --build
+
+# Stop all services
+docker compose down
+```
 
 ---
 
