@@ -1,8 +1,9 @@
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-sqlalchemy[asyncio]==2.0.36
-asyncpg==0.30.0
-pydantic-settings==2.7.1
-langchain-ollama==0.3.0
-langchain-core==0.3.28
-python-dotenv==1.0.1
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+sqlalchemy[asyncio]>=2.0.0
+asyncpg>=0.30.0
+pydantic-settings>=2.7.0
+langchain-ollama>=0.2.0
+langchain-core>=0.3.47
+python-dotenv>=1.0.0
+
