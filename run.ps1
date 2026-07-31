@@ -72,6 +72,22 @@ if ($Reset) {
 Test-Docker
 
 if ($Monitor) {
+    # Check available RAM - warn if under 12GB total
+    $totalRAM = [math]::Round((Get-CimInstance -ClassName Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
+    if ($totalRAM -lt 12) {
+        Write-Host "  [WARN] Your system has ${totalRAM}GB RAM. Monitoring (Prometheus + Grafana)" -ForegroundColor Yellow
+        Write-Host "         adds ~1.5GB extra load and may cause containers to crash." -ForegroundColor Yellow
+        Write-Host "         Recommendation: Use '.\run.ps1' without -Monitor on 8GB systems." -ForegroundColor Yellow
+        Write-Host ""
+        $continue = Read-Host "  Continue anyway? (y/N)"
+        if ($continue -ne 'y') {
+            Write-Host "  [INFO] Starting core services only (without monitoring)..." -ForegroundColor Cyan
+            $Monitor = $false
+        }
+    }
+}
+
+if ($Monitor) {
     Write-Host "  [START] Starting all services WITH monitoring (Prometheus + Grafana)..." -ForegroundColor Cyan
     Write-Host ""
     docker compose --project-directory $ProjectRoot --profile monitoring up -d --build
