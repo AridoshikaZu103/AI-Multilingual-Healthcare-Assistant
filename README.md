@@ -211,8 +211,8 @@ Run `.\run.ps1` to get an interactive menu:
 
 ### Monitoring URLs (Option 2)
 
-- 📊 Prometheus: http://localhost:9090
-- 📈 Grafana: http://localhost:3001 (admin/admin)
+- 📊 Prometheus: http://127.0.0.1:9090
+- 📈 Grafana: http://127.0.0.1:3001 (admin/admin)
 
 ---
 

@@ -146,7 +146,7 @@ function Start-PostSetup {
     Write-Host "  ====================================================================" -ForegroundColor DarkCyan
     Write-Host ""
     Write-Host "  Frontend:       " -NoNewline -ForegroundColor White
-    Write-Host "http://127.0.0.1:3000  (or http://localhost:3000)" -ForegroundColor Cyan
+    Write-Host "http://127.0.0.1:3000" -ForegroundColor Cyan
     Write-Host "  Backend API:    " -NoNewline -ForegroundColor White
     Write-Host "http://127.0.0.1:8000" -ForegroundColor Cyan
     Write-Host "  API Docs:       " -NoNewline -ForegroundColor White
@@ -154,9 +154,9 @@ function Start-PostSetup {
 
     if ($WithMonitor) {
         Write-Host "  Prometheus:     " -NoNewline -ForegroundColor White
-        Write-Host "http://127.0.0.1:9090  (or http://localhost:9090)" -ForegroundColor Cyan
+        Write-Host "http://127.0.0.1:9090" -ForegroundColor Cyan
         Write-Host "  Grafana:        " -NoNewline -ForegroundColor White
-        Write-Host "http://127.0.0.1:3001  (or http://localhost:3001) - (admin/admin)" -ForegroundColor Cyan
+        Write-Host "http://127.0.0.1:3001 (admin/admin)" -ForegroundColor Cyan
     }
 
     Write-Host ""
