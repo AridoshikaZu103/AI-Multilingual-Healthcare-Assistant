@@ -154,9 +154,9 @@ function Start-PostSetup {
 
     if ($WithMonitor) {
         Write-Host "  Prometheus:     " -NoNewline -ForegroundColor White
-        Write-Host "http://localhost:9090" -ForegroundColor Cyan
+        Write-Host "http://127.0.0.1:9090  (or http://localhost:9090)" -ForegroundColor Cyan
         Write-Host "  Grafana:        " -NoNewline -ForegroundColor White
-        Write-Host "http://localhost:3001  (admin/admin)" -ForegroundColor Cyan
+        Write-Host "http://127.0.0.1:3001  (or http://localhost:3001) - (admin/admin)" -ForegroundColor Cyan
     }
 
     Write-Host ""
