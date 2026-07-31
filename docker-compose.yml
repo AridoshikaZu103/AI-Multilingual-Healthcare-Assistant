@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: healthcare-frontend
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     depends_on:
       - backend
     networks:
@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
     container_name: healthcare-backend
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     environment:
       - DATABASE_URL=postgresql+asyncpg://admin:password@postgres:5432/healthcare
       - OLLAMA_BASE_URL=http://ollama:11434
