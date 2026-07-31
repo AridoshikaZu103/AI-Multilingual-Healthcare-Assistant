@@ -4,6 +4,7 @@ An intelligent, multilingual virtual healthcare assistant designed to improve he
 
 ![Architecture](https://img.shields.io/badge/Architecture-Full_Stack-blue)
 ![AI](https://img.shields.io/badge/AI-LLM_Powered-green)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF)
 ![Docker](https://img.shields.io/badge/Deployment-Docker-2496ED)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
