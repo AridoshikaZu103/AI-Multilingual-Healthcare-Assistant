@@ -7,7 +7,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 60000, // 60s timeout for AI responses
+  timeout: 300000, // 300s (5 min) timeout for CPU AI model inference
 });
 
 // ── Chat API ─────────────────────────────────────────
