@@ -40,12 +40,17 @@ async def lifespan(app: FastAPI):
     logger.info("Application shutting down")
 
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="AI-Driven Multilingual Healthcare Assistant for Rural Communities",
     lifespan=lifespan,
 )
+
+# Prometheus metrics instrumentation
+Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
 # CORS middleware
 app.add_middleware(

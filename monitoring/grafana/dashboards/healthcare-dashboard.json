@@ -11,19 +11,18 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "green", "value": null },
-              { "color": "yellow", "value": 50 },
-              { "color": "red", "value": 80 }
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
             ]
           },
-          "unit": "percent"
+          "unit": "short"
         }
       },
       "gridPos": { "h": 8, "w": 6, "x": 0, "y": 0 },
@@ -38,25 +37,37 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "title": "CPU Usage",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "name": "Prometheus"
+          },
+          "editorMode": "code",
+          "expr": "up{job=\"healthcare-backend\"}",
+          "legendFormat": "Backend Status",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Backend App Status (1=UP)",
       "type": "gauge"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "green", "value": null },
-              { "color": "yellow", "value": 60 },
-              { "color": "red", "value": 85 }
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
             ]
           },
-          "unit": "percent"
+          "unit": "short"
         }
       },
       "gridPos": { "h": 8, "w": 6, "x": 6, "y": 0 },
@@ -69,19 +80,32 @@
           "values": false
         }
       },
-      "title": "Memory Usage",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "name": "Prometheus"
+          },
+          "editorMode": "code",
+          "expr": "up{job=\"prometheus\"}",
+          "legendFormat": "Prometheus Status",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Prometheus Status (1=UP)",
       "type": "gauge"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "name": "Prometheus"
       },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
           "custom": {
-            "axisLabel": "",
+            "axisLabel": "State (1=UP)",
             "drawStyle": "line",
             "fillOpacity": 10,
             "lineWidth": 2
@@ -90,14 +114,27 @@
       },
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
       "id": 3,
-      "title": "Backend Health",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "name": "Prometheus"
+          },
+          "editorMode": "code",
+          "expr": "up",
+          "legendFormat": "{{job}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Services Health Uptime Over Time",
       "type": "timeseries"
     },
     {
       "gridPos": { "h": 4, "w": 24, "x": 0, "y": 8 },
       "id": 4,
       "options": {
-        "content": "# AI Healthcare Assistant Dashboard\n\nThis dashboard monitors the performance of the AI-Driven Multilingual Healthcare Assistant.\n\n**Services:** React Frontend | FastAPI Backend | PostgreSQL | Ollama LLM\n\n> **Note:** To enable full metrics, add `prometheus-fastapi-instrumentator` to the backend and expose `/metrics` endpoint.",
+        "content": "# AI Healthcare Assistant Dashboard\n\nThis dashboard monitors the live health and metrics of the AI-Driven Multilingual Healthcare Assistant.\n\n**Monitored Services:** React Frontend | FastAPI Backend | PostgreSQL | Ollama LLM | Prometheus",
         "mode": "markdown"
       },
       "title": "Application Info",
@@ -112,5 +149,5 @@
   "timezone": "",
   "title": "AI Healthcare Assistant Dashboard",
   "uid": "healthcare-dashboard",
-  "version": 1
+  "version": 2
 }
