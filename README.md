@@ -170,41 +170,49 @@ AI-Multilingual-Healthcare-Assistant/
    - 📡 Backend API: http://localhost:8000
    - 📖 API Docs (Swagger): http://localhost:8000/docs
 
-### Launcher Script Options
+### Launcher Script - Interactive Menu
+
+Run `.\run.ps1` to get an interactive menu:
+
+```
+  ====================================================================
+  [HEALTHCARE ASSISTANT] AI-Driven Multilingual Healthcare Assistant
+  ====================================================================
+  System RAM: 7.9GB
+
+  Choose an option:
+
+    [1] Start Core Services
+        Frontend + Backend + PostgreSQL + Ollama
+
+    [2] Start with Monitoring
+        Core + Prometheus + Grafana
+
+    [3] Stop All Services
+        Gracefully stop all running containers
+
+    [4] Reset and Restart
+        Stop all, remove database volumes, restart clean
+
+  -------------------------------------------------------------------
+  Enter choice (1-4):
+```
+
+> **Note:** Option `[2]` will warn you if your system has less than 12GB RAM.
+
+### Direct Flags (for scripting/automation)
 
 | Command | Description |
 |---------|-------------|
-| `.\run.ps1` | Start all core services |
-| `.\run.ps1 -Monitor` | Start with Prometheus + Grafana monitoring |
-| `.\run.ps1 -Stop` | Stop all running services |
-| `.\run.ps1 -Reset` | Stop, remove data volumes, and restart fresh |
+| `.\run.ps1` | Interactive menu (choose 1-4) |
+| `.\run.ps1 -Monitor` | Direct: start with monitoring |
+| `.\run.ps1 -Stop` | Direct: stop all services |
+| `.\run.ps1 -Reset` | Direct: reset and restart clean |
 
-### Start with Monitoring
-
-```powershell
-.\run.ps1 -Monitor
-```
+### Monitoring URLs (Option 2)
 
 - 📊 Prometheus: http://localhost:9090
 - 📈 Grafana: http://localhost:3001 (admin/admin)
-
-### Manual Docker Commands (Alternative)
-
-If you prefer not to use the launcher script:
-
-```bash
-# Start core services
-docker compose up -d --build
-
-# Pull the LLM model (first time only)
-docker exec -it healthcare-ollama ollama pull gemma:2b
-
-# Start with monitoring
-docker compose --profile monitoring up -d --build
-
-# Stop all services
-docker compose down
-```
 
 ---
 
