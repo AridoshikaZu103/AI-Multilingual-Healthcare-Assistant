@@ -51,6 +51,7 @@ class AIService:
                     base_url=settings.OLLAMA_BASE_URL,
                     temperature=0.7,
                     num_predict=1024,
+                    timeout=180.0,
                 )
                 self._initialized = True
                 logger.info(f"AI Service initialized with model: {settings.OLLAMA_MODEL}")
