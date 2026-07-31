@@ -104,6 +104,10 @@ React Frontend     FastAPI Backend     PostgreSQL
 
 ```
 AI-Multilingual-Healthcare-Assistant/
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # GitHub Actions CI/CD Pipeline
+│
 ├── frontend/                    # React + Vite + Tailwind CSS
 │   ├── src/
 │   │   ├── components/          # Reusable UI components
