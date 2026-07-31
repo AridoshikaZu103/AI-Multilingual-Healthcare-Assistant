@@ -18,11 +18,12 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "green", "value": 1 }
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 10 },
+              { "color": "red", "value": 30 }
             ]
           },
-          "unit": "short"
+          "unit": "s"
         }
       },
       "gridPos": { "h": 8, "w": 6, "x": 0, "y": 0 },
@@ -44,13 +45,13 @@
             "name": "Prometheus"
           },
           "editorMode": "code",
-          "expr": "up{job=\"healthcare-backend\"}",
-          "legendFormat": "Backend Status",
+          "expr": "process_cpu_seconds_total{job=\"healthcare-backend\"}",
+          "legendFormat": "CPU Time (s)",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Backend App Status (1=UP)",
+      "title": "CPU Usage (Backend Total)",
       "type": "gauge"
     },
     {
@@ -63,11 +64,12 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "green", "value": 1 }
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 250 },
+              { "color": "red", "value": 450 }
             ]
           },
-          "unit": "short"
+          "unit": "megabytes"
         }
       },
       "gridPos": { "h": 8, "w": 6, "x": 6, "y": 0 },
@@ -87,13 +89,13 @@
             "name": "Prometheus"
           },
           "editorMode": "code",
-          "expr": "up{job=\"prometheus\"}",
-          "legendFormat": "Prometheus Status",
+          "expr": "process_resident_memory_bytes{job=\"healthcare-backend\"} / 1024 / 1024",
+          "legendFormat": "Memory (MB)",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Prometheus Status (1=UP)",
+      "title": "Memory Usage (Backend MB)",
       "type": "gauge"
     },
     {
@@ -105,7 +107,7 @@
         "defaults": {
           "color": { "mode": "palette-classic" },
           "custom": {
-            "axisLabel": "State (1=UP)",
+            "axisLabel": "Requests / Health (1=UP)",
             "drawStyle": "line",
             "fillOpacity": 10,
             "lineWidth": 2
@@ -122,19 +124,30 @@
           },
           "editorMode": "code",
           "expr": "up",
-          "legendFormat": "{{job}}",
+          "legendFormat": "Service Uptime: {{job}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "name": "Prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(http_requests_total)",
+          "legendFormat": "Total HTTP Requests",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Services Health Uptime Over Time",
+      "title": "Backend Health & Request Volume",
       "type": "timeseries"
     },
     {
       "gridPos": { "h": 4, "w": 24, "x": 0, "y": 8 },
       "id": 4,
       "options": {
-        "content": "# AI Healthcare Assistant Dashboard\n\nThis dashboard monitors the live health and metrics of the AI-Driven Multilingual Healthcare Assistant.\n\n**Monitored Services:** React Frontend | FastAPI Backend | PostgreSQL | Ollama LLM | Prometheus",
+        "content": "# AI Healthcare Assistant Dashboard\n\nThis dashboard monitors real-time CPU, Memory, HTTP Requests, and Uptime of the AI Healthcare Assistant backend.\n\n**Metrics Source:** Prometheus scrapes `/metrics` endpoint on `backend:8000`.",
         "mode": "markdown"
       },
       "title": "Application Info",
@@ -149,5 +162,5 @@
   "timezone": "",
   "title": "AI Healthcare Assistant Dashboard",
   "uid": "healthcare-dashboard",
-  "version": 2
+  "version": 3
 }
