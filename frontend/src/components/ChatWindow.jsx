@@ -117,8 +117,8 @@ function ChatWindow({ messages, onSendMessage, isLoading, t }) {
             id="send-button"
             onClick={handleSend}
             disabled={!inputValue.trim() || isLoading}
-            className="btn-primary flex-shrink-0 w-13 h-13 rounded-2xl flex items-center justify-center
-                       disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
+            className="btn-primary flex-shrink-0 w-13 h-13 rounded-full flex items-center justify-center
+                       disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none shadow-lg shadow-cyan-500/30"
           >
             <HiOutlinePaperAirplane className="w-5 h-5 -rotate-45" />
           </button>
