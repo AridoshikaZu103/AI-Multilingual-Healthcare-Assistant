@@ -75,7 +75,23 @@ function Test-Docker {
         $null = docker info 2>&1
         if ($LASTEXITCODE -ne 0) { throw "Docker not running" }
     } catch {
-        Write-Host "  [ERROR] Docker is not running. Please start Docker Desktop and try again." -ForegroundColor Red
+        Write-Host "  [WARN] Docker daemon is not running. Attempting to start Docker Desktop..." -ForegroundColor Yellow
+        $dockerExe = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+        if (Test-Path $dockerExe) {
+            Start-Process $dockerExe
+            Write-Host "  [WAIT] Waiting for Docker engine to initialize..." -ForegroundColor Yellow
+            $retries = 0
+            while ($retries -lt 15) {
+                Start-Sleep -Seconds 2
+                $null = docker info 2>&1
+                if ($LASTEXITCODE -eq 0) {
+                    Write-Host "  [OK] Docker engine started successfully!" -ForegroundColor Green
+                    return
+                }
+                $retries++
+            }
+        }
+        Write-Host "  [ERROR] Docker is not running. Please start Docker Desktop manually and try again." -ForegroundColor Red
         Write-Host ""
         exit 1
     }
