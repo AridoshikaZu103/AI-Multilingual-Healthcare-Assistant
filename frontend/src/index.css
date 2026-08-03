@@ -2,127 +2,343 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Base Styles ────────────────────────────────────── */
+/* ── Base & Global Styling ────────────────────────────────────── */
 @layer base {
+  :root {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    @apply bg-surface-950 text-white;
+  html {
+    scroll-behavior: smooth;
   }
 
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #060913;
+    color: #f8fafc;
+    overflow-x: hidden;
+  }
+
+  /* Custom Apple-inspired Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 7px;
+    height: 7px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-surface-900;
+    background: rgba(10, 15, 30, 0.8);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-surface-600 rounded-full;
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.4), rgba(99, 102, 241, 0.4));
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-surface-500;
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.7), rgba(99, 102, 241, 0.7));
   }
 }
 
-/* ── Component Styles ───────────────────────────────── */
+/* ── Component Styles & Glassmorphism ───────────────────────── */
 @layer components {
-  /* Glassmorphism card */
+  /* Apple Pro 3D Glass Card */
   .glass-card {
-    @apply bg-surface-800/50 backdrop-blur-xl border border-surface-700/50 rounded-2xl;
+    background: rgba(13, 20, 36, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:bg-surface-800/70 hover:border-primary-500/30 hover:shadow-lg hover:shadow-primary-500/5;
+    @apply glass-card;
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(18, 28, 48, 0.7);
+    border-color: rgba(6, 182, 212, 0.35);
+    box-shadow: 
+      0 25px 60px rgba(6, 182, 212, 0.12),
+      0 0 20px rgba(6, 182, 212, 0.1),
+      inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* 3D Perspective Tilt Card Container */
+  .tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    will-change: transform;
+  }
+
+  /* Dynamic Mouse Follow Spotlight Overlay */
+  .mouse-spotlight {
+    position: relative;
+  }
+
+  .mouse-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(6, 182, 212, 0.08),
+      transparent 80%
+    );
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+    transition: opacity 0.5s ease;
   }
 
   /* Gradient text */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-400 via-primary-300 to-accent-400 bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 50%, #818cf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  /* Primary button */
+  .gradient-text-emerald {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Primary Apple Pro Button */
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-xl
-           transition-all duration-300 hover:from-primary-500 hover:to-primary-400
-           hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.98]
+    @apply relative px-6 py-3 font-semibold text-white rounded-full overflow-hidden
+           transition-all duration-300 active:scale-[0.97]
            focus:outline-none focus:ring-2 focus:ring-primary-500/50;
+    background: linear-gradient(135deg, #0891b2 0%, #0284c7 50%, #4f46e5 100%);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #06b6d4 0%, #0369a1 50%, #6366f1 100%);
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px);
   }
 
   /* Secondary button */
   .btn-secondary {
-    @apply px-5 py-2.5 bg-surface-700/50 text-surface-200 font-medium rounded-xl border border-surface-600/50
-           transition-all duration-300 hover:bg-surface-700 hover:border-primary-500/30 hover:text-white
-           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-surface-500/50;
+    @apply px-5 py-2.5 text-slate-200 font-medium rounded-full border
+           transition-all duration-300 active:scale-[0.98] focus:outline-none;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
   }
 
-  /* Chip / tag */
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(6, 182, 212, 0.4);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Chip / Tag */
   .chip {
-    @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full
-           bg-primary-500/10 text-primary-300 border border-primary-500/20;
+    @apply inline-flex items-center px-3.5 py-1 text-xs font-medium rounded-full
+           transition-all duration-300;
+    background: rgba(6, 182, 212, 0.12);
+    color: #67e8f9;
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
+  }
+
+  .chip:hover {
+    background: rgba(6, 182, 212, 0.22);
+    border-color: rgba(6, 182, 212, 0.45);
+    transform: scale(1.03);
   }
 
   /* Input field */
   .input-field {
-    @apply w-full px-4 py-3 bg-surface-800/50 border border-surface-600/50 rounded-xl text-white
-           placeholder:text-surface-400 focus:outline-none focus:border-primary-500/50
-           focus:ring-2 focus:ring-primary-500/20 transition-all duration-300;
+    @apply w-full px-6 py-3.5 text-white rounded-full placeholder-slate-400
+           transition-all duration-300 focus:outline-none;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .input-field:focus {
+    border-color: rgba(6, 182, 212, 0.6);
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.85);
   }
 
   /* Sidebar nav item */
   .nav-item {
-    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-surface-300 font-medium
-           transition-all duration-200 hover:bg-surface-800/50 hover:text-white cursor-pointer;
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 font-medium
+           transition-all duration-300 cursor-pointer relative overflow-hidden;
+  }
+
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    transform: translateX(3px);
   }
 
   .nav-item.active {
-    @apply bg-primary-500/10 text-primary-300 border border-primary-500/20;
+    background: linear-gradient(90deg, rgba(6, 182, 212, 0.18) 0%, rgba(99, 102, 241, 0.1) 100%);
+    color: #38bdf8;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
   }
 
   /* Chat message bubbles */
   .chat-bubble-user {
-    @apply ml-auto max-w-[80%] px-5 py-3 rounded-2xl rounded-br-md
-           bg-gradient-to-br from-primary-600 to-primary-700 text-white;
+    @apply ml-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-br-sm text-white;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    box-shadow: 0 8px 25px rgba(2, 132, 199, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
   .chat-bubble-bot {
-    @apply mr-auto max-w-[80%] px-5 py-3 rounded-2xl rounded-bl-md
-           bg-surface-800/70 text-surface-100 border border-surface-700/50;
-  }
-
-  /* Typing indicator */
-  .typing-dot {
-    @apply w-2 h-2 bg-primary-400 rounded-full;
-    animation: typing 1.4s ease-in-out infinite;
-  }
-
-  .typing-dot:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .typing-dot:nth-child(3) {
-    animation-delay: 0.4s;
+    @apply mr-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-bl-sm text-slate-100;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
 }
 
-/* ── Utility Animations ─────────────────────────────── */
-@layer utilities {
-  .animate-delay-100 {
-    animation-delay: 0.1s;
+/* ── Live Loop Keyframe Animations ─────────────────────────── */
+
+/* Floating Orbs Loop 1 */
+@keyframes float-orb-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
-  .animate-delay-200 {
-    animation-delay: 0.2s;
+  33% {
+    transform: translate(60px, -40px) scale(1.15) rotate(120deg);
   }
-  .animate-delay-300 {
-    animation-delay: 0.3s;
+  66% {
+    transform: translate(-30px, 50px) scale(0.9) rotate(240deg);
   }
+}
+
+/* Floating Orbs Loop 2 */
+@keyframes float-orb-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  40% {
+    transform: translate(-70px, 30px) scale(1.2) rotate(-140deg);
+  }
+  80% {
+    transform: translate(40px, -60px) scale(0.85) rotate(140deg);
+  }
+}
+
+/* Live Pulse Ring Loop */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(6, 182, 212, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+  }
+}
+
+/* Glass Shimmer Highlight */
+@keyframes glass-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Apple Entrance Reveal */
+@keyframes apple-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Typing indicator animation */
+@keyframes typing-wave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  @apply w-2 h-2 rounded-full;
+  background: #38bdf8;
+  animation: typing-wave 1.2s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.animate-float-orb-1 {
+  animation: float-orb-1 18s ease-in-out infinite;
+}
+
+.animate-float-orb-2 {
+  animation: float-orb-2 22s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.animate-apple-reveal {
+  animation: apple-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: glass-shimmer 3s infinite;
 }

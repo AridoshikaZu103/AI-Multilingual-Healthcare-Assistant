@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { HiOutlinePaperAirplane, HiOutlineSparkles } from 'react-icons/hi2';
+import { HiOutlinePaperAirplane, HiOutlineSparkles, HiSparkles } from 'react-icons/hi2';
 import ChatMessage from './ChatMessage';
 
 function ChatWindow({ messages, onSendMessage, isLoading, t }) {
@@ -37,34 +37,43 @@ function ChatWindow({ messages, onSendMessage, isLoading, t }) {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
       {/* Chat messages area */}
-      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 space-y-5">
+      <div className="flex-1 overflow-y-auto px-4 lg:px-8 py-6 space-y-6">
         {messages.length === 0 && (
-          <div className="flex flex-col items-center justify-center h-full text-center animate-fade-in">
-            {/* Welcome hero */}
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mb-6 shadow-2xl shadow-primary-500/20">
-              <HiOutlineSparkles className="w-10 h-10 text-white" />
+          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-apple-reveal my-auto">
+            {/* Welcome hero icon */}
+            <div className="relative group mb-6">
+              <div className="w-24 h-24 rounded-3xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-cyan-500/30 group-hover:scale-110 transition-all duration-500">
+                <HiOutlineSparkles className="w-12 h-12 text-white animate-pulse" />
+              </div>
+              <div className="absolute inset-0 rounded-3xl bg-cyan-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <h2 className="text-2xl font-bold gradient-text mb-2">
-              {t('chat.title')}
-            </h2>
-            <p className="text-surface-400 text-sm max-w-md mb-8">
+
+            <div className="flex items-center gap-2 mb-2">
+              <h2 className="text-3xl font-extrabold tracking-tight gradient-text">
+                {t('chat.title')}
+              </h2>
+              <HiSparkles className="w-6 h-6 text-cyan-400 animate-spin-slow" />
+            </div>
+
+            <p className="text-slate-300 text-sm max-w-lg mb-10 leading-relaxed font-normal">
               {t('chat.welcome')}
             </p>
 
             {/* Suggestion chips */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-xl w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl w-full">
               {Array.isArray(suggestions) && suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   id={`suggestion-${index}`}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="glass-card-hover px-4 py-3 text-left text-sm text-surface-300 hover:text-white
-                             transition-all duration-200"
+                  className="glass-card-hover p-4 text-left text-xs sm:text-sm text-slate-200 hover:text-white
+                             border border-white/10 hover:border-cyan-500/40 rounded-2xl
+                             transition-all duration-300 group flex items-start gap-3 shadow-lg shadow-black/40 hover:scale-[1.02]"
                 >
-                  <span className="text-primary-400 mr-2">→</span>
-                  {suggestion}
+                  <span className="text-cyan-400 group-hover:translate-x-1 transition-transform font-bold">→</span>
+                  <span className="flex-1 leading-snug">{suggestion}</span>
                 </button>
               ))}
             </div>
@@ -84,8 +93,8 @@ function ChatWindow({ messages, onSendMessage, isLoading, t }) {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input area */}
-      <div className="px-4 lg:px-8 py-4 border-t border-surface-800/50 bg-surface-950/80 backdrop-blur-xl">
+      {/* Glass input bar area */}
+      <div className="px-4 lg:px-8 py-4 border-t border-white/10 bg-[#0a0f1d]/85 backdrop-blur-2xl shadow-2xl">
         <div className="flex items-end gap-3 max-w-4xl mx-auto">
           <div className="flex-1 relative">
             <textarea
@@ -96,11 +105,11 @@ function ChatWindow({ messages, onSendMessage, isLoading, t }) {
               onKeyDown={handleKeyDown}
               placeholder={t('chat.placeholder')}
               rows={1}
-              className="input-field resize-none min-h-[48px] max-h-[120px] pr-12"
+              className="input-field resize-none min-h-[52px] max-h-[140px] pr-12 text-sm"
               style={{ height: 'auto' }}
               onInput={(e) => {
                 e.target.style.height = 'auto';
-                e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+                e.target.style.height = Math.min(e.target.scrollHeight, 140) + 'px';
               }}
             />
           </div>
@@ -108,18 +117,15 @@ function ChatWindow({ messages, onSendMessage, isLoading, t }) {
             id="send-button"
             onClick={handleSend}
             disabled={!inputValue.trim() || isLoading}
-            className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500
-                       flex items-center justify-center text-white
-                       transition-all duration-300 hover:from-primary-500 hover:to-primary-400
-                       hover:shadow-lg hover:shadow-primary-500/25 active:scale-95
-                       disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
+            className="btn-primary flex-shrink-0 w-13 h-13 rounded-full flex items-center justify-center
+                       disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none shadow-lg shadow-cyan-500/30"
           >
-            <HiOutlinePaperAirplane className="w-5 h-5" />
+            <HiOutlinePaperAirplane className="w-5 h-5 -rotate-45" />
           </button>
         </div>
 
         {/* Disclaimer */}
-        <p className="text-center text-[10px] text-surface-600 mt-2 max-w-4xl mx-auto">
+        <p className="text-center text-[10px] text-slate-400 mt-2.5 max-w-4xl mx-auto font-medium">
           {t('app.disclaimer')}
         </p>
       </div>
