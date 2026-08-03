@@ -207,13 +207,13 @@
 
   /* Chat message bubbles */
   .chat-bubble-user {
-    @apply ml-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-br-xs text-white;
+    @apply ml-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-br-sm text-white;
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     box-shadow: 0 8px 25px rgba(2, 132, 199, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
   .chat-bubble-bot {
-    @apply mr-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-bl-xs text-slate-100;
+    @apply mr-auto max-w-[85%] px-5 py-3.5 rounded-2xl rounded-bl-sm text-slate-100;
     background: rgba(17, 24, 39, 0.7);
     backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.1);
