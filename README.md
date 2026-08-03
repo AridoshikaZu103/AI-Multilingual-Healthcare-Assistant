@@ -25,16 +25,16 @@ An intelligent, multilingual virtual healthcare assistant designed to improve he
 
 ## ✨ Features
 
+- ✅ **Apple Pro-Style 3D Glass UI** — Interactive 3D mouse tilt parallax, ambient background loops & glassmorphism
 - ✅ **AI-Powered Virtual Assistant** — Conversational healthcare guidance powered by Ollama LLM
 - ✅ **Multilingual Support** — English, Hindi (हिन्दी), Telugu (తెలుగు)
 - ✅ **Government Healthcare Schemes** — Detailed information on PMJAY, Aarogyasri, JSY, and more
 - ✅ **Healthcare Facility Finder** — Find nearby hospitals, PHCs, and health centres
 - ✅ **FAQ System** — Quick answers to common healthcare questions
-- ✅ **REST API Architecture** — Clean, well-documented API endpoints
+- ✅ **REST API Architecture** — Clean, well-documented API endpoints with Prometheus `/metrics`
 - ✅ **PostgreSQL Database** — Persistent storage for schemes, facilities, and chat history
 - ✅ **Docker Containerisation** — One-command deployment with Docker Compose
-- ✅ **Responsive Web Interface** — Modern, dark-themed UI with glassmorphism design
-- ✅ **Monitoring Stack** — Optional Prometheus + Grafana dashboards
+- ✅ **Monitoring Stack** — Optional Prometheus + Grafana real-time metrics dashboards
 
 ---
 
